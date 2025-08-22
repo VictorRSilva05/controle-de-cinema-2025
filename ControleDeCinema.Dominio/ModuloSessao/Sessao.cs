@@ -15,6 +15,10 @@ public class Sessao : EntidadeBase<Sessao>
     public Sala Sala { get; set; }
 
     public List<Ingresso> Ingressos { get; set; }
+    public string V1 { get; }
+    public int V2 { get; }
+    public Filme Filme1 { get; }
+    public Sala Sala1 { get; }
 
     [ExcludeFromCodeCoverage]
     protected Sessao()
