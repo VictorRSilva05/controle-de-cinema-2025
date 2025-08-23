@@ -17,4 +17,8 @@
     <ProjectReference Include="..\ControleDeCinema.Dominio\ControleDeCinema.Dominio.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="ModuloAutenticacao\" />
+  </ItemGroup>
+
 </Project>
