@@ -23,6 +23,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ControleDeCinema.Testes.Uni
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ControleDeCinema.Testes.Integracao", "ControleDeCinema.Testes.Integracao\ControleDeCinema.Testes.Integracao.csproj", "{6A554848-19E7-41BA-8DEE-B13909701BEE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ControleDeCinema.Testes.Interface", "ControleDeCinema.Testes.Interface\ControleDeCinema.Testes.Interface.csproj", "{0173A399-69EB-419D-893F-41B34C36B4EF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -53,6 +55,10 @@ Global
 		{6A554848-19E7-41BA-8DEE-B13909701BEE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6A554848-19E7-41BA-8DEE-B13909701BEE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6A554848-19E7-41BA-8DEE-B13909701BEE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0173A399-69EB-419D-893F-41B34C36B4EF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0173A399-69EB-419D-893F-41B34C36B4EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0173A399-69EB-419D-893F-41B34C36B4EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0173A399-69EB-419D-893F-41B34C36B4EF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -64,6 +70,7 @@ Global
 		{EAE3E615-3E4F-4EC0-8849-D69EF8746A21} = {C9BFEEE7-782F-44A7-BE24-A0547110B7C2}
 		{E121769F-6C44-437C-A5D4-20D452C814AC} = {7F8E8B23-5708-4261-B599-7FD28736A4A8}
 		{6A554848-19E7-41BA-8DEE-B13909701BEE} = {7F8E8B23-5708-4261-B599-7FD28736A4A8}
+		{0173A399-69EB-419D-893F-41B34C36B4EF} = {7F8E8B23-5708-4261-B599-7FD28736A4A8}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {97011726-34E8-4F39-ACF8-32120C5EDAC2}
