@@ -104,4 +104,49 @@ public class AutenticacaoIndexPageObject
         driver.Navigate().GoToUrl(Path.Combine(enderecoBase, "autenticacao/login"));
         return this;
     }
+
+    public bool ContemLogin(string email)
+    {
+        return wait.Until(d => d.PageSource.Contains(email));
+    }
+
+    public bool ChamouExcecaoDeConfirmarSenha()
+    {
+        try
+        {
+            wait.Until(d => d.FindElement(By.CssSelector("span[data-se='spanConfirmarSenha']")));
+            return true;
+        }
+        catch (WebDriverTimeoutException)
+        {
+            return false;
+        }
+    }
+
+    public bool ChamouExcecaoDeSenha()
+    {
+        try
+        {
+            wait.Until(d => d.FindElement(By.CssSelector("span[data-se='spanSenha']")));
+            return true;
+        }
+        catch (WebDriverTimeoutException)
+        {
+            return false;
+        }
+    }
+
+    public bool ChamouExcecaoDeEmail()
+    {
+        try
+        {
+            wait.Until(d => d.FindElement(By.CssSelector("span[data-se='spanEmail']")));
+            return true;
+        }
+        catch (WebDriverTimeoutException)
+        {
+            return false;
+        }
+    }
 }
+

@@ -15,7 +15,7 @@ public class SalaFormPageObject
 
         wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
 
-        wait.Until(d => d.FindElement(By.CssSelector("form")).Displayed);
+       //wait.Until(d => d.FindElement(By.CssSelector("form")).Displayed);
     }
 
     public SalaFormPageObject PreencherNumero(string numero)
@@ -27,7 +27,7 @@ public class SalaFormPageObject
         return this;
     }
 
-    public SalaFormPageObject PreencherQuantidade(string capacidade)
+    public SalaFormPageObject PreencherCapacidade(string capacidade)
     {
         var inputCapacidade = driver?.FindElement(By.Id("Capacidade"));
         inputCapacidade?.Clear();
@@ -60,14 +60,19 @@ public class SalaIndexPageObject
 
     public SalaIndexPageObject IrPara(string enderecoBase)
     {
-        driver.Navigate().GoToUrl(Path.Combine(enderecoBase, "salas"));
+        // Use string interpolation to build the URL correctly for Razor Pages
+        driver.Navigate().GoToUrl($"{enderecoBase}/salas");
+
+        // Wait for the page to load and the "Cadastrar" button to be visible
+       wait.Until(d => d.FindElement(By.CssSelector("a[data-se='btnCadastrar']")).Displayed);
 
         return this;
     }
     public SalaFormPageObject ClickCadastrar()
     {
-        wait.Until(d => d.FindElement(By.CssSelector("a[data-se='btnCadastrar']"))).Click();
+        //wait.Until(d => d.FindElement(By.CssSelector("a[data-se='btnCadastrar']"))).Click();
 
+        driver.FindElement(By.Id("btnCadastrar")).Click();
         return new SalaFormPageObject(driver!);
     }
 
@@ -90,5 +95,31 @@ public class SalaIndexPageObject
         wait.Until(d => d.FindElement(By.CssSelector("a[data-se='btnCadastrar']")).Displayed);
 
         return driver.PageSource.Contains(sala);
+    }
+
+    public bool ContemBotaoCadastrar()
+    {
+        try
+        {
+            wait.Until(d => d.FindElement(By.CssSelector("a[data-se='btnCadastrar']")));
+            return true;
+        }
+        catch (WebDriverTimeoutException)
+        {
+            return false;
+        }
+    }
+
+    public bool ContemCampoNumero()
+    {
+        try
+        {
+            wait.Until(d => d.FindElement(By.Id("Numero")));
+            return true;
+        }
+        catch (WebDriverTimeoutException)
+        {
+            return false;
+        }
     }
 }

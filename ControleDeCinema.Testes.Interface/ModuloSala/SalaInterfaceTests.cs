@@ -1,4 +1,5 @@
 ﻿using ControleDeCinema.Testes.Interface.Compartilhado;
+using ControleDeCinema.Testes.Interface.ModuloAutenticacao;
 
 namespace ControleDeCinema.Testes.Interface.ModuloSala;
 
@@ -6,22 +7,41 @@ namespace ControleDeCinema.Testes.Interface.ModuloSala;
 [TestCategory("Testes de Interface de Sala")]
 public sealed class SalaInterfaceTests : TestFixture
 {
+    [TestInitialize]
+    public override void InicializarTeste()
+    {
+        base.InicializarTeste();
+        // Arrange
+        var autenticacaoIndex = new AutenticacaoIndexPageObject(driver!)
+             .IrPara(enderecoBase!);
+
+        // Act
+        autenticacaoIndex
+            .ClickCadastrar()
+            .PreencherEmail("h.romeupinto@gmail.com")
+            .PreencherSenha("AbcBolinhas12345")
+            .ConfirmarSenha("AbcBolinhas12345")
+            .SelecionarTipoDeUsuario("Empresa")
+            .Confirmar();
+    }
+
     [TestMethod]
     public void Deve_Cadastrar_Sala_Corretamente()
     {
+
         // Arrange
         var salaIndex = new SalaIndexPageObject(driver!)
             .IrPara(enderecoBase!);
 
-        // Act
         salaIndex
             .ClickCadastrar()
             .PreencherNumero("1")
-            .PreencherQuantidade("100")
+            .PreencherCapacidade("100")
             .Confirmar();
 
         // Assert
         Assert.IsTrue(salaIndex.ContemSala("1"));
+
     }
 
     [TestMethod]
@@ -34,14 +54,14 @@ public sealed class SalaInterfaceTests : TestFixture
         salaIndex
             .ClickCadastrar()
             .PreencherNumero("1")
-            .PreencherQuantidade("100")
+            .PreencherCapacidade("100")
             .Confirmar();
 
         // Act
         salaIndex
             .ClickEditar()
             .PreencherNumero("2")
-            .PreencherQuantidade("50")
+            .PreencherCapacidade("50")
             .Confirmar();
 
         // Assert
@@ -58,7 +78,7 @@ public sealed class SalaInterfaceTests : TestFixture
         salaIndex
             .ClickCadastrar()
             .PreencherNumero("1")
-            .PreencherQuantidade("100")
+            .PreencherCapacidade("100")
             .Confirmar();
 
         // Act
@@ -81,13 +101,13 @@ public sealed class SalaInterfaceTests : TestFixture
         salaIndex
             .ClickCadastrar()
             .PreencherNumero("1")
-            .PreencherQuantidade("100")
+            .PreencherCapacidade("100")
             .Confirmar();
 
         salaIndex
           .ClickCadastrar()
           .PreencherNumero("2")
-          .PreencherQuantidade("100")
+          .PreencherCapacidade("100")
           .Confirmar();
 
         // Assert
@@ -121,7 +141,7 @@ public sealed class SalaInterfaceTests : TestFixture
         salaIndex
             .ClickCadastrar()
             .PreencherNumero("1")
-            .PreencherQuantidade("-20")
+            .PreencherCapacidade("-20")
             .Confirmar();
 
         // Assert
@@ -138,15 +158,16 @@ public sealed class SalaInterfaceTests : TestFixture
         salaIndex
             .ClickCadastrar()
             .PreencherNumero("1")
-            .PreencherQuantidade("100")
+            .PreencherCapacidade("100")
             .Confirmar();
 
         salaIndex
           .ClickCadastrar()
           .PreencherNumero("1")
-          .PreencherQuantidade("100")
+          .PreencherCapacidade("100")
           .Confirmar();
 
         // Assert
     }
+
 }

@@ -19,7 +19,8 @@ public class GeneroFilmeFormPageObject
 
     public GeneroFilmeFormPageObject PreencherNome(string nome)
     {
-        var inputNome = driver?.FindElement(By.Id("Descricao"));
+        var inputNome = wait.Until(d => d.FindElement(By.CssSelector("a[data-se='inputDescricao']")));
+       
         inputNome?.Clear();
         inputNome?.SendKeys(nome);
 

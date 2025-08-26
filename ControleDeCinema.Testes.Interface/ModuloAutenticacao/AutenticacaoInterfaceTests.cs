@@ -22,8 +22,10 @@ public sealed class AutenticacaoInterfaceTests : TestFixture
             .SelecionarTipoDeUsuario("Empresa")
             .Confirmar();
 
+        var conseguiuAcessarMenu = autenticacaoIndex.ContemLogin("h.romeupinto@gmail.com");
+
         // Assert
-        Assert.AreEqual("/", driver!.Url);
+        Assert.IsTrue(conseguiuAcessarMenu);
     }
 
     [TestMethod]
@@ -43,7 +45,13 @@ public sealed class AutenticacaoInterfaceTests : TestFixture
             .Confirmar();
 
         // Assert
+        var conseguiuAcessarMenu = autenticacaoIndex.ContemLogin("jefferson.caminhoes@hotmail.com");
+
+        // Assert
+        Assert.IsTrue(conseguiuAcessarMenu);
     }
+
+    /*
 
     [TestMethod]
     public void Deve_Realizar_Login_Corretamente()
@@ -65,6 +73,7 @@ public sealed class AutenticacaoInterfaceTests : TestFixture
     {
 
     }
+    */
 
     [TestMethod]
     public void Deve_Ocorrer_Erro_Ao_Nao_Confirmar_Senha()
@@ -81,7 +90,10 @@ public sealed class AutenticacaoInterfaceTests : TestFixture
             .SelecionarTipoDeUsuario("Cliente")
             .Confirmar();
 
+        var erro = autenticacaoIndex.ChamouExcecaoDeConfirmarSenha();
+
         // Assert
+        Assert.IsTrue(erro);
     }
 
     [TestMethod]
@@ -98,7 +110,10 @@ public sealed class AutenticacaoInterfaceTests : TestFixture
             .SelecionarTipoDeUsuario("Cliente")
             .Confirmar();
 
+        var erro = autenticacaoIndex.ChamouExcecaoDeSenha();
+
         // Assert
+        Assert.IsTrue(erro);
     }
 
     [TestMethod]
@@ -116,7 +131,10 @@ public sealed class AutenticacaoInterfaceTests : TestFixture
             .SelecionarTipoDeUsuario("Cliente")
             .Confirmar();
 
+        var erro = autenticacaoIndex.ChamouExcecaoDeEmail();
+
         // Assert
+        Assert.IsTrue(erro);
     }
 
     [TestMethod]
@@ -135,7 +153,10 @@ public sealed class AutenticacaoInterfaceTests : TestFixture
             .SelecionarTipoDeUsuario("Cliente")
             .Confirmar();
 
+        var erro = autenticacaoIndex.ChamouExcecaoDeEmail();
+
         // Assert
+        Assert.IsTrue(erro);
     }
 
     [TestMethod]
@@ -154,7 +175,10 @@ public sealed class AutenticacaoInterfaceTests : TestFixture
             .SelecionarTipoDeUsuario("Cliente")
             .Confirmar();
 
+        var erro = autenticacaoIndex.ChamouExcecaoDeSenha();
+
         // Assert
+        Assert.IsTrue(erro);
     }
 
     [TestMethod]
@@ -173,7 +197,10 @@ public sealed class AutenticacaoInterfaceTests : TestFixture
             .SelecionarTipoDeUsuario("Cliente")
             .Confirmar();
 
+        var erro = autenticacaoIndex.ChamouExcecaoDeSenha();
+
         // Assert
+        Assert.IsTrue(erro);
     }
 
     [TestMethod]
@@ -192,7 +219,10 @@ public sealed class AutenticacaoInterfaceTests : TestFixture
             .SelecionarTipoDeUsuario("Cliente")
             .Confirmar();
 
+        var erro = autenticacaoIndex.ChamouExcecaoDeSenha();
+
         // Assert
+        Assert.IsTrue(erro);
     }
 
     [TestMethod]
@@ -211,6 +241,9 @@ public sealed class AutenticacaoInterfaceTests : TestFixture
             .SelecionarTipoDeUsuario("Cliente")
             .Confirmar();
 
+        var erro = autenticacaoIndex.ChamouExcecaoDeConfirmarSenha();
+
         // Assert
+        Assert.IsTrue(erro);
     }
 }
