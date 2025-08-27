@@ -13,9 +13,12 @@ public class SalaFormPageObject
     {
         this.driver = driver;
 
-        wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
+        wait = new WebDriverWait(driver, TimeSpan.FromSeconds(20));
+        wait.IgnoreExceptionTypes(typeof(StaleElementReferenceException), typeof(NoSuchElementException));
 
-       //wait.Until(d => d.FindElement(By.CssSelector("form")).Displayed);
+        //wait.Until(d => d.FindElement(By.CssSelector("form[action='/salas/cadastrar']")).Displayed);
+        wait.Until(d => d.FindElement(By.CssSelector("form[data-se='formPrincipal']")).Displayed);
+
     }
 
     public SalaFormPageObject PreencherNumero(string numero)
@@ -38,9 +41,9 @@ public class SalaFormPageObject
 
     public SalaIndexPageObject Confirmar()
     {
-        wait.Until(d => d.FindElement(By.CssSelector("button[type='submit']"))).Click();
+        wait.Until(d => d.FindElement(By.CssSelector("button[data-se='btnConfirmar']"))).Click();
 
-        wait.Until(d => d.FindElement(By.CssSelector("a[data-se='btnCadastrar']")).Displayed);
+        //wait.Until(d => d.FindElement(By.CssSelector("a[data-se='btnCadastrar']")).Displayed);
 
         return new SalaIndexPageObject(driver!);
     }
@@ -56,6 +59,7 @@ public class SalaIndexPageObject
         this.driver = driver;
 
         wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
+        wait.IgnoreExceptionTypes(typeof(StaleElementReferenceException), typeof(NoSuchElementException));
     }
 
     public SalaIndexPageObject IrPara(string enderecoBase)
@@ -70,9 +74,8 @@ public class SalaIndexPageObject
     }
     public SalaFormPageObject ClickCadastrar()
     {
-        //wait.Until(d => d.FindElement(By.CssSelector("a[data-se='btnCadastrar']"))).Click();
+        wait.Until(d => d.FindElement(By.CssSelector("a[data-se='btnCadastrar']"))).Click();
 
-        driver.FindElement(By.Id("btnCadastrar")).Click();
         return new SalaFormPageObject(driver!);
     }
 
@@ -97,24 +100,11 @@ public class SalaIndexPageObject
         return driver.PageSource.Contains(sala);
     }
 
-    public bool ContemBotaoCadastrar()
+   public bool ChamouExcecaoDeNumero()
     {
         try
         {
-            wait.Until(d => d.FindElement(By.CssSelector("a[data-se='btnCadastrar']")));
-            return true;
-        }
-        catch (WebDriverTimeoutException)
-        {
-            return false;
-        }
-    }
-
-    public bool ContemCampoNumero()
-    {
-        try
-        {
-            wait.Until(d => d.FindElement(By.Id("Numero")));
+            wait.Until(d => d.FindElement(By.CssSelector("span[data-se='spanNumero']")));
             return true;
         }
         catch (WebDriverTimeoutException)

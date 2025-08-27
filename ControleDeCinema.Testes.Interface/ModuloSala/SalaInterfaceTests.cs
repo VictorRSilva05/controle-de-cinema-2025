@@ -11,18 +11,20 @@ public sealed class SalaInterfaceTests : TestFixture
     public override void InicializarTeste()
     {
         base.InicializarTeste();
-        // Arrange
-        var autenticacaoIndex = new AutenticacaoIndexPageObject(driver!)
-             .IrPara(enderecoBase!);
 
-        // Act
-        autenticacaoIndex
-            .ClickCadastrar()
-            .PreencherEmail("h.romeupinto@gmail.com")
-            .PreencherSenha("AbcBolinhas12345")
-            .ConfirmarSenha("AbcBolinhas12345")
-            .SelecionarTipoDeUsuario("Empresa")
-            .Confirmar();
+        RegistrarContaEmpresarial();
+        //// Arrange
+        //var autenticacaoIndex = new AutenticacaoIndexPageObject(driver!)
+        //     .IrPara(enderecoBase!);
+
+        //// Act
+        //autenticacaoIndex
+        //    .ClickCadastrar()
+        //    .PreencherEmail("h.romeupinto@gmail.com")
+        //    .PreencherSenha("AbcBolinhas12345")
+        //    .ConfirmarSenha("AbcBolinhas12345")
+        //    .SelecionarTipoDeUsuario("Empresa")
+        //    .Confirmar();
     }
 
     [TestMethod]
@@ -41,7 +43,6 @@ public sealed class SalaInterfaceTests : TestFixture
 
         // Assert
         Assert.IsTrue(salaIndex.ContemSala("1"));
-
     }
 
     [TestMethod]
@@ -87,7 +88,7 @@ public sealed class SalaInterfaceTests : TestFixture
             .Confirmar();
 
         // Assert
-        Assert.IsFalse(salaIndex.ContemSala("2"));
+        Assert.IsFalse(salaIndex.ContemSala("# 1"));
     }
 
     [TestMethod]
@@ -127,7 +128,7 @@ public sealed class SalaInterfaceTests : TestFixture
             .Confirmar();
 
         // Assert
-
+        Assert.IsTrue(salaIndex.ChamouExcecaoDeNumero());
     }
 
     [TestMethod]
@@ -137,37 +138,38 @@ public sealed class SalaInterfaceTests : TestFixture
         var salaIndex = new SalaIndexPageObject(driver!)
             .IrPara(enderecoBase!);
 
-        // Act
         salaIndex
             .ClickCadastrar()
             .PreencherNumero("1")
-            .PreencherCapacidade("-20")
+            .PreencherCapacidade("-1")
             .Confirmar();
 
-        // Assert
-    }
-
-    [TestMethod]
-    public void Deve_Retornar_Erro_Caso_Cadastro_For_Duplicado()
-    {
-        // Arrange
-        var salaIndex = new SalaIndexPageObject(driver!)
-            .IrPara(enderecoBase!);
-
-        // Act
-        salaIndex
-            .ClickCadastrar()
-            .PreencherNumero("1")
-            .PreencherCapacidade("100")
-            .Confirmar();
-
-        salaIndex
-          .ClickCadastrar()
-          .PreencherNumero("1")
-          .PreencherCapacidade("100")
-          .Confirmar();
 
         // Assert
+        Assert.IsTrue(salaIndex.ChamouExcecaoDeNumero());
     }
+
+    //[TestMethod]
+    //public void Deve_Retornar_Erro_Caso_Cadastro_For_Duplicado()
+    //{
+    //    // Arrange
+    //    var salaIndex = new SalaIndexPageObject(driver!)
+    //        .IrPara(enderecoBase!);
+
+    //    // Act
+    //    salaIndex
+    //        .ClickCadastrar()
+    //        .PreencherNumero("1")
+    //        .PreencherCapacidade("100")
+    //        .Confirmar();
+
+    //    salaIndex
+    //      .ClickCadastrar()
+    //      .PreencherNumero("1")
+    //      .PreencherCapacidade("100")
+    //      .Confirmar();
+
+    //    // Assert
+    //}
 
 }

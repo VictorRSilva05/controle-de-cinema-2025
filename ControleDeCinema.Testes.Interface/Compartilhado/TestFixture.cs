@@ -81,8 +81,9 @@ public abstract class TestFixture
         dbContext.Ingressos.RemoveRange(dbContext.Ingressos);
         dbContext.Filmes.RemoveRange(dbContext.Filmes);
         dbContext.GenerosFilme.RemoveRange(dbContext.GenerosFilme);
-        dbContext.Salas.RemoveRange(dbContext.Salas);   
-
+        dbContext.Salas.RemoveRange(dbContext.Salas);
+        dbContext.Users.RemoveRange(dbContext.Users);
+        dbContext.Roles.RemoveRange(dbContext.Roles);
         dbContext.SaveChanges();
     }
 
@@ -165,6 +166,9 @@ public abstract class TestFixture
         var enderecoSelenium = new Uri($"http://{seleniumContainer.Hostname}:{seleniumContainer.GetMappedPublicPort(seleniumPort)}/wd/hub");
 
         var options = new ChromeOptions();
+        options.AddArgument("--window-size=1920,2000");
+        options.AddArgument("--disable-dev-shm-usage");
+        options.AddArgument("--no-sandbox");
 
         driver = new RemoteWebDriver(enderecoSelenium, options);
     }
@@ -220,11 +224,11 @@ public abstract class TestFixture
             return true;
         });
 
-        //wait.Until(d =>
-        //    !d.Url.Contains("/autenticacao/registro", StringComparison.OrdinalIgnoreCase) &&
-        //    d.FindElements(By.CssSelector("form[action='/autenticacao/registro']")).Count == 0
-        //    );
+        wait.Until(d =>
+            !d.Url.Contains("/autenticacao/registro", StringComparison.OrdinalIgnoreCase) &&
+            d.FindElements(By.CssSelector("form[action='/autenticacao/registro']")).Count == 0
+        );
 
-        wait.Until(d => d.FindElements(By.CssSelector("form[action='/autenticacao/registro']")).Count > 0);
+        wait.Until(d => d.FindElements(By.CssSelector("form[action='/autenticacao/logout']")).Count > 0);
     }
 }
