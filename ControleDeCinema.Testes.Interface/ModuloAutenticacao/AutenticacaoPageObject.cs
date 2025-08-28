@@ -12,7 +12,7 @@ public class AutenticacaoFormPageObject
     {
         this.driver = driver;
 
-        wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
+        wait = new WebDriverWait(driver, TimeSpan.FromSeconds(20));
 
         wait.Until(d => d.FindElement(By.CssSelector("form")).Displayed);
     }
@@ -89,7 +89,7 @@ public class AutenticacaoIndexPageObject
     {
         this.driver = driver;
 
-        wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
+        wait = new WebDriverWait(driver, TimeSpan.FromSeconds(20));
     }
 
     public AutenticacaoFormPageObject ClickCadastrar()

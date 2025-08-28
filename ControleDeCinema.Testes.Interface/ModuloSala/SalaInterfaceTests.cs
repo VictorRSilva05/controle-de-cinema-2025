@@ -13,18 +13,6 @@ public sealed class SalaInterfaceTests : TestFixture
         base.InicializarTeste();
 
         RegistrarContaEmpresarial();
-        //// Arrange
-        //var autenticacaoIndex = new AutenticacaoIndexPageObject(driver!)
-        //     .IrPara(enderecoBase!);
-
-        //// Act
-        //autenticacaoIndex
-        //    .ClickCadastrar()
-        //    .PreencherEmail("h.romeupinto@gmail.com")
-        //    .PreencherSenha("AbcBolinhas12345")
-        //    .ConfirmarSenha("AbcBolinhas12345")
-        //    .SelecionarTipoDeUsuario("Empresa")
-        //    .Confirmar();
     }
 
     [TestMethod]

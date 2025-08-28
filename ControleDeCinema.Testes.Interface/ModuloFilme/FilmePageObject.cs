@@ -21,7 +21,7 @@ public class FilmeFormPageObject
 
     public FilmeFormPageObject PreencherTitulo(string titulo)
     {
-        var inputNome = driver?.FindElement(By.Id("Titulo"));
+        var inputNome = wait.Until(d => d.FindElement(By.CssSelector("input[data-se='inputTitulo']")));
         inputNome?.Clear();
         inputNome?.SendKeys(titulo);
 
@@ -30,7 +30,7 @@ public class FilmeFormPageObject
 
     public FilmeFormPageObject PreencherDuracao(string duracao)
     {
-        var inputNome = driver?.FindElement(By.Id("Duracao"));
+        var inputNome = wait.Until(d => d.FindElement(By.Id("Duracao")));
         inputNome?.Clear();
         inputNome?.SendKeys(duracao);
 
@@ -53,7 +53,7 @@ public class FilmeFormPageObject
     {
         wait.Until(d => d.FindElement(By.CssSelector("button[data-se='btnConfirmar']"))).Click();
 
-        //wait.Until(d => d.FindElement(By.CssSelector("a[data-se='btnCadastrar']")).Displayed);
+        wait.Until(d => d.FindElement(By.CssSelector("a[data-se='btnCadastrar']")).Displayed);
 
         return new FilmeIndexPageObject(driver!);
     }
@@ -68,7 +68,7 @@ public class FilmeIndexPageObject
     {
         this.driver = driver;
 
-        wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
+        wait = new WebDriverWait(driver, TimeSpan.FromSeconds(20));
     }
 
     public FilmeIndexPageObject IrPara(string enderecoBase)

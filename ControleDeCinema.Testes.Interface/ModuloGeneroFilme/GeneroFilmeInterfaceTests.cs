@@ -20,9 +20,11 @@ public sealed class GeneroFilmeInterfaceTests : TestFixture
     [TestMethod]
     public void Deve_Cadastrar_GeneroFilme_Corretamente()
     {
+        // Arrange
         var generoFilmeIndex = new GeneroFilmeIndexPageObject(driver!)
              .IrPara(enderecoBase!);
 
+        //Act
             generoFilmeIndex
                 .ClickCadastrar()
                 .PreencherNome("Ação")

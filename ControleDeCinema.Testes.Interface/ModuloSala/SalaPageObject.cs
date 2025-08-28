@@ -23,7 +23,7 @@ public class SalaFormPageObject
 
     public SalaFormPageObject PreencherNumero(string numero)
     {
-        var inputNumero = driver?.FindElement(By.Id("Numero"));
+        var inputNumero = wait.Until(d => d.FindElement(By.Id("Numero")));
         inputNumero?.Clear();
         inputNumero?.SendKeys(numero);
 
@@ -32,7 +32,7 @@ public class SalaFormPageObject
 
     public SalaFormPageObject PreencherCapacidade(string capacidade)
     {
-        var inputCapacidade = driver?.FindElement(By.Id("Capacidade"));
+        var inputCapacidade = wait.Until(d => d.FindElement(By.Id("Capacidade")));
         inputCapacidade?.Clear();
         inputCapacidade?.SendKeys(capacidade);
 
@@ -43,7 +43,7 @@ public class SalaFormPageObject
     {
         wait.Until(d => d.FindElement(By.CssSelector("button[data-se='btnConfirmar']"))).Click();
 
-        //wait.Until(d => d.FindElement(By.CssSelector("a[data-se='btnCadastrar']")).Displayed);
+        wait.Until(d => d.FindElement(By.CssSelector("a[data-se='btnCadastrar']")).Displayed);
 
         return new SalaIndexPageObject(driver!);
     }
@@ -58,7 +58,7 @@ public class SalaIndexPageObject
     {
         this.driver = driver;
 
-        wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
+        wait = new WebDriverWait(driver, TimeSpan.FromSeconds(20));
         wait.IgnoreExceptionTypes(typeof(StaleElementReferenceException), typeof(NoSuchElementException));
     }
 

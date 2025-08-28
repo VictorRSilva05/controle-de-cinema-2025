@@ -20,7 +20,7 @@ public class GeneroFilmeFormPageObject
 
     public GeneroFilmeFormPageObject PreencherNome(string nome)
     {
-        var inputNome = wait.Until(d => d.FindElement(By.Id("Descricao")));
+        var inputNome = wait.Until(d => d.FindElement(By.CssSelector("input[data-se='inputDescricao']")));
        
         inputNome?.Clear();
         inputNome?.SendKeys(nome);
@@ -32,7 +32,7 @@ public class GeneroFilmeFormPageObject
     {
         wait.Until(d => d.FindElement(By.CssSelector("button[data-se='btnConfirmar']"))).Click();
 
-        //wait.Until(d => d.FindElement(By.CssSelector("a[data-se='btnCadastrar']")).Displayed);
+        wait.Until(d => d.FindElement(By.CssSelector("a[data-se='btnCadastrar']")).Displayed);
 
         return new GeneroFilmeIndexPageObject(driver!);
     }
@@ -47,7 +47,7 @@ public class GeneroFilmeIndexPageObject
     {
         this.driver = driver;
 
-        wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
+        wait = new WebDriverWait(driver, TimeSpan.FromSeconds(20));
     }
 
     public GeneroFilmeIndexPageObject IrPara(string enderecoBase)
