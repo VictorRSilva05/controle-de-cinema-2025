@@ -149,27 +149,28 @@ public sealed class SalaInterfaceTests : TestFixture
         Assert.IsTrue(salaIndex.ChamouExcecaoDeNumero());
     }
 
-    //[TestMethod]
-    //public void Deve_Retornar_Erro_Caso_Cadastro_For_Duplicado()
-    //{
-    //    // Arrange
-    //    var salaIndex = new SalaIndexPageObject(driver!)
-    //        .IrPara(enderecoBase!);
+    [TestMethod]
+    public void Deve_Retornar_Erro_Caso_Cadastro_For_Duplicado()
+    {
+        // Arrange
+        var salaIndex = new SalaIndexPageObject(driver!)
+            .IrPara(enderecoBase!);
 
-    //    // Act
-    //    salaIndex
-    //        .ClickCadastrar()
-    //        .PreencherNumero("1")
-    //        .PreencherCapacidade("100")
-    //        .Confirmar();
+        // Act
+        salaIndex
+            .ClickCadastrar()
+            .PreencherNumero("1")
+            .PreencherCapacidade("100")
+            .Confirmar();
 
-    //    salaIndex
-    //      .ClickCadastrar()
-    //      .PreencherNumero("1")
-    //      .PreencherCapacidade("100")
-    //      .Confirmar();
+        salaIndex
+          .ClickCadastrar()
+          .PreencherNumero("1")
+          .PreencherCapacidade("100")
+          .Confirmar();
 
-    //    // Assert
-    //}
+        // Assert
+        Assert.IsTrue(salaIndex.ChamouAlert());
+    }
 
 }

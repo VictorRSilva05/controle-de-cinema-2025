@@ -12,14 +12,15 @@ public class GeneroFilmeFormPageObject
     {
         this.driver = driver;
 
-        wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
+        wait = new WebDriverWait(driver, TimeSpan.FromSeconds(20));
+        wait.IgnoreExceptionTypes(typeof(StaleElementReferenceException), typeof(NoSuchElementException));
 
-        wait.Until(d => d.FindElement(By.CssSelector("form")).Displayed);
+        wait.Until(d => d.FindElement(By.CssSelector("form[data-se='formPrincipal']")).Displayed);
     }
 
     public GeneroFilmeFormPageObject PreencherNome(string nome)
     {
-        var inputNome = wait.Until(d => d.FindElement(By.CssSelector("a[data-se='inputDescricao']")));
+        var inputNome = wait.Until(d => d.FindElement(By.Id("Descricao")));
        
         inputNome?.Clear();
         inputNome?.SendKeys(nome);
@@ -29,9 +30,9 @@ public class GeneroFilmeFormPageObject
 
     public GeneroFilmeIndexPageObject Confirmar()
     {
-        wait.Until(d => d.FindElement(By.CssSelector("button[type='submit']"))).Click();
+        wait.Until(d => d.FindElement(By.CssSelector("button[data-se='btnConfirmar']"))).Click();
 
-        wait.Until(d => d.FindElement(By.CssSelector("a[data-se='btnCadastrar']")).Displayed);
+        //wait.Until(d => d.FindElement(By.CssSelector("a[data-se='btnCadastrar']")).Displayed);
 
         return new GeneroFilmeIndexPageObject(driver!);
     }
@@ -51,7 +52,11 @@ public class GeneroFilmeIndexPageObject
 
     public GeneroFilmeIndexPageObject IrPara(string enderecoBase)
     {
-        driver.Navigate().GoToUrl(Path.Combine(enderecoBase, "generos"));
+        // Use string interpolation to build the URL correctly for Razor Pages
+        driver.Navigate().GoToUrl($"{enderecoBase}/generos");
+
+        // Wait for the page to load and the "Cadastrar" button to be visible
+        wait.Until(d => d.FindElement(By.CssSelector("a[data-se='btnCadastrar']")).Displayed);
 
         return this;
     }
@@ -81,5 +86,31 @@ public class GeneroFilmeIndexPageObject
         wait.Until(d => d.FindElement(By.CssSelector("a[data-se='btnCadastrar']")).Displayed);
 
         return driver.PageSource.Contains(nome);
+    }
+
+    public bool ChamouExcecaoDeDescricao()
+    {
+        try
+        {
+            wait.Until(d => d.FindElement(By.CssSelector("span[data-se='spanDescricao']")));
+            return true;
+        }
+        catch (WebDriverTimeoutException)
+        {
+            return false;
+        }
+    }
+
+    public bool ChamouAlert()
+    {
+        try
+        {
+            wait.Until(d => d.FindElement(By.CssSelector("div[data-se='alert']")));
+            return true;
+        }
+        catch (WebDriverTimeoutException)
+        {
+            return false;
+        }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using ControleDeCinema.Testes.Interface.ModuloAutenticacao;
+using ControleDeCinema.Testes.Interface.ModuloGeneroFilme;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 
@@ -12,9 +13,10 @@ public class FilmeFormPageObject
     {
         this.driver = driver;
 
-        wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
+        wait = new WebDriverWait(driver, TimeSpan.FromSeconds(20));
+        wait.IgnoreExceptionTypes(typeof(StaleElementReferenceException), typeof(NoSuchElementException));
 
-        wait.Until(d => d.FindElement(By.CssSelector("form")).Displayed);
+        wait.Until(d => d.FindElement(By.CssSelector("form[data-se='formPrincipal']")).Displayed);
     }
 
     public FilmeFormPageObject PreencherTitulo(string titulo)
@@ -49,9 +51,9 @@ public class FilmeFormPageObject
 
     public FilmeIndexPageObject Confirmar()
     {
-        wait.Until(d => d.FindElement(By.CssSelector("button[type='submit']"))).Click();
+        wait.Until(d => d.FindElement(By.CssSelector("button[data-se='btnConfirmar']"))).Click();
 
-        wait.Until(d => d.FindElement(By.CssSelector("a[data-se='btnCadastrar']")).Displayed);
+        //wait.Until(d => d.FindElement(By.CssSelector("a[data-se='btnCadastrar']")).Displayed);
 
         return new FilmeIndexPageObject(driver!);
     }
@@ -71,7 +73,11 @@ public class FilmeIndexPageObject
 
     public FilmeIndexPageObject IrPara(string enderecoBase)
     {
-        driver.Navigate().GoToUrl(Path.Combine(enderecoBase, "filmes"));
+        // Use string interpolation to build the URL correctly for Razor Pages
+        driver.Navigate().GoToUrl($"{enderecoBase}/filmes");
+
+        // Wait for the page to load and the "Cadastrar" button to be visible
+        wait.Until(d => d.FindElement(By.CssSelector("a[data-se='btnCadastrar']")).Displayed);
 
         return this;
     }
@@ -101,5 +107,57 @@ public class FilmeIndexPageObject
         wait.Until(d => d.FindElement(By.CssSelector("a[data-se='btnCadastrar']")).Displayed);
 
         return driver.PageSource.Contains(nome);
+    }
+
+    public bool ChamouExcecaoDeTitulo()
+    {
+        try
+        {
+            wait.Until(d => d.FindElement(By.CssSelector("span[data-se='spanTitulo']")));
+            return true;
+        }
+        catch (WebDriverTimeoutException)
+        {
+            return false;
+        }
+    }
+
+    public bool ChamouExcecaoDeDuracao()
+    {
+        try
+        {
+            wait.Until(d => d.FindElement(By.CssSelector("span[data-se='spanDuracao']")));
+            return true;
+        }
+        catch (WebDriverTimeoutException)
+        {
+            return false;
+        }
+    }
+
+    public bool ChamouExcecaoDeGenero()
+    {
+        try
+        {
+            wait.Until(d => d.FindElement(By.CssSelector("span[data-se='spanGenero']")));
+            return true;
+        }
+        catch (WebDriverTimeoutException)
+        {
+            return false;
+        }
+    }
+
+    public bool ChamouAlert()
+    {
+        try
+        {
+            wait.Until(d => d.FindElement(By.CssSelector("div[data-se='alert']")));
+            return true;
+        }
+        catch (WebDriverTimeoutException)
+        {
+            return false;
+        }
     }
 }

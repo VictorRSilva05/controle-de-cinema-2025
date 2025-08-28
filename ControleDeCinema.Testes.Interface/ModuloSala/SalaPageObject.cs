@@ -112,4 +112,17 @@ public class SalaIndexPageObject
             return false;
         }
     }
+
+    public bool ChamouAlert()
+    {
+        try
+        {
+            wait.Until(d => d.FindElement(By.CssSelector("div[data-se='alert']")));
+            return true;
+        }
+        catch (WebDriverTimeoutException)
+        {
+            return false;
+        }
+    }
 }

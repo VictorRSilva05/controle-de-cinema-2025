@@ -14,17 +14,7 @@ public sealed class GeneroFilmeInterfaceTests : TestFixture
     {
         base.InicializarTeste();
 
-        var autenticacaoIndex = new AutenticacaoIndexPageObject(driver!)
-             .IrPara(enderecoBase!);
-
-        // Act
-        autenticacaoIndex
-            .ClickCadastrar()
-            .PreencherEmail("h.romeupinto@gmail.com")
-            .PreencherSenha("AbcBolinhas12345")
-            .ConfirmarSenha("AbcBolinhas12345")
-            .SelecionarTipoDeUsuario("Empresa")
-            .Confirmar();
+        RegistrarContaEmpresarial();
     }
 
     [TestMethod]
@@ -64,6 +54,7 @@ public sealed class GeneroFilmeInterfaceTests : TestFixture
         Assert.IsTrue(generoFilmeIndex.ContemGeneroFilme("Terror"));
     }
 
+    [TestMethod]
     public void Deve_Excluir_GeneroFilme_Corretamente()
     {
         // Arrange
@@ -84,6 +75,7 @@ public sealed class GeneroFilmeInterfaceTests : TestFixture
         Assert.IsFalse(generoFilmeIndex.ContemGeneroFilme("Ação"));
     }
 
+    [TestMethod]
     public void Deve_Listar_Generos_Corretamente()
     {
         // Arrange
@@ -105,6 +97,7 @@ public sealed class GeneroFilmeInterfaceTests : TestFixture
         Assert.IsTrue(generoFilmeIndex.ContemGeneroFilme("Ação") && generoFilmeIndex.ContemGeneroFilme("Medo"));
     }
 
+    [TestMethod]
     public void Deve_Ocorrer_Erro_Ao_Deixar_Campo_Vazio()
     {
         // Arrange
@@ -117,8 +110,10 @@ public sealed class GeneroFilmeInterfaceTests : TestFixture
             .Confirmar();
 
         // Assert
+        Assert.IsTrue(generoFilmeIndex.ChamouExcecaoDeDescricao());
     }
 
+    [TestMethod]
     public void Deve_Ocorrer_Erro_Ao_Tentar_Cadastrar_Descricao_Duplicada()
     {
         // Arrange
@@ -135,21 +130,8 @@ public sealed class GeneroFilmeInterfaceTests : TestFixture
             .ClickCadastrar()
             .PreencherNome("Ação")
             .Confirmar();
+
+        // Assert
+        Assert.IsTrue(generoFilmeIndex.ChamouAlert());
     }
-
-    private static void DumpOnFailure(IWebDriver driver, string prefix)
-    {
-        try
-        {
-            Screenshot shot = ((ITakesScreenshot)driver).GetScreenshot();
-            string png = Path.Combine(Path.GetTempPath(), $"{prefix}-{DateTime.Now:HHmmss}.png");
-            shot.SaveAsFile(png);
-
-            string html = Path.Combine(Path.GetTempPath(), $"{prefix}-{DateTime.Now:HHmmss}.html");
-            File.WriteAllText(html, driver.PageSource);
-        }
-        catch { /* best-effort */ }
-    }
-
-
 }
