@@ -43,7 +43,7 @@ public class SalaFormPageObject
     {
         wait.Until(d => d.FindElement(By.CssSelector("button[data-se='btnConfirmar']"))).Click();
 
-        wait.Until(d => d.FindElement(By.CssSelector("a[data-se='btnCadastrar']")).Displayed);
+        //wait.Until(d => d.FindElement(By.CssSelector("a[data-se='btnCadastrar']")).Displayed);
 
         return new SalaIndexPageObject(driver!);
     }

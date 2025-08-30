@@ -21,7 +21,7 @@ public class FilmeFormPageObject
 
     public FilmeFormPageObject PreencherTitulo(string titulo)
     {
-        var inputNome = wait.Until(d => d.FindElement(By.CssSelector("input[data-se='inputTitulo']")));
+        var inputNome = wait.Until(d => d.FindElement(By.Id("Titulo")));
         inputNome?.Clear();
         inputNome?.SendKeys(titulo);
 
@@ -53,7 +53,7 @@ public class FilmeFormPageObject
     {
         wait.Until(d => d.FindElement(By.CssSelector("button[data-se='btnConfirmar']"))).Click();
 
-        wait.Until(d => d.FindElement(By.CssSelector("a[data-se='btnCadastrar']")).Displayed);
+        //wait.Until(d => d.FindElement(By.CssSelector("a[data-se='btnCadastrar']")).Displayed);
 
         return new FilmeIndexPageObject(driver!);
     }

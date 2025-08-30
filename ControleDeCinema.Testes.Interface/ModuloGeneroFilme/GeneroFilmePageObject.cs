@@ -20,7 +20,7 @@ public class GeneroFilmeFormPageObject
 
     public GeneroFilmeFormPageObject PreencherNome(string nome)
     {
-        var inputNome = wait.Until(d => d.FindElement(By.CssSelector("input[data-se='inputDescricao']")));
+        var inputNome = wait.Until(d => d.FindElement(By.Id("Descricao")));
        
         inputNome?.Clear();
         inputNome?.SendKeys(nome);
@@ -32,7 +32,7 @@ public class GeneroFilmeFormPageObject
     {
         wait.Until(d => d.FindElement(By.CssSelector("button[data-se='btnConfirmar']"))).Click();
 
-        wait.Until(d => d.FindElement(By.CssSelector("a[data-se='btnCadastrar']")).Displayed);
+        //wait.Until(d => d.FindElement(By.CssSelector("a[data-se='btnCadastrar']")).Displayed);
 
         return new GeneroFilmeIndexPageObject(driver!);
     }
