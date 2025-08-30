@@ -109,16 +109,16 @@ public abstract class TestFixture
 
     private static async Task InicializarAplicacaoAsync()
     {
-        // Configura a imagem à partir do Dockerfile
+         //Configura a imagem à partir do Dockerfile
 
-        //var imagem = new ImageFromDockerfileBuilder()
-        //    .WithDockerfileDirectory(CommonDirectoryPath.GetSolutionDirectory(), string.Empty)
-        //    .WithDockerfile("Dockerfile")
-        //    .WithBuildArgument("RESOURCE_REAPER_SESSION_ID", ResourceReaper.DefaultSessionId.ToString("D"))
-        //    .WithName("controle-de-cinema-app-e2e:latest")
-        //    .Build();
+        var imagem = new ImageFromDockerfileBuilder()
+            .WithDockerfileDirectory(CommonDirectoryPath.GetSolutionDirectory(), string.Empty)
+            .WithDockerfile("Dockerfile")
+            .WithBuildArgument("RESOURCE_REAPER_SESSION_ID", ResourceReaper.DefaultSessionId.ToString("D"))
+            .WithName("controle-de-cinema-app-e2e:latest")
+            .Build();
 
-        //await imagem.CreateAsync().ConfigureAwait(false);
+        await imagem.CreateAsync().ConfigureAwait(false);
 
         // Configura a connection string para a rede: "Host=teste-facil-e2e-testdb;Port=5432;Database=TesteFacilDb;Username=postgres;Password=YourStrongPassword"
         var connectionStringRede = dbContainer?.GetConnectionString()
@@ -127,7 +127,7 @@ public abstract class TestFixture
 
         // Configura o container da aplicação e inicializa o enderecoBase
         appContainer = new ContainerBuilder()
-            .WithImage("controledecinemawebapp")
+            .WithImage(imagem)
             .WithPortBinding(appPort, true)
             .WithNetwork(rede)
             .WithNetworkAliases("controle-de-cinema-webapp")

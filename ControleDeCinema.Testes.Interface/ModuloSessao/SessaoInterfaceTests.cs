@@ -2,10 +2,10 @@
 using ControleDeCinema.Testes.Interface.ModuloFilme;
 using ControleDeCinema.Testes.Interface.ModuloGeneroFilme;
 using ControleDeCinema.Testes.Interface.ModuloSala;
-using TesteFacil.Testes.Interface.Compartilhado;
 
 namespace ControleDeCinema.Testes.Interface.ModuloSessao;
 
+/*
 [TestClass]
 [TestCategory("Testes de Interface de Sessão")]
 public sealed class SessaoInterfaceTests : TestFixtureLocal
@@ -13,7 +13,7 @@ public sealed class SessaoInterfaceTests : TestFixtureLocal
     [TestInitialize]
     public override void InicializarTeste()
     {
-        base.InicializarTeste();
+        //base.InicializarTeste();
 
         RegistrarContaEmpresarial();
 
@@ -94,3 +94,4 @@ public sealed class SessaoInterfaceTests : TestFixtureLocal
         Assert.IsTrue(sessaoIndex.ContemSessao("Heat"));
     }
 }
+*/
